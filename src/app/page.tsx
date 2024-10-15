@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
 export default function Home() {
@@ -12,7 +13,7 @@ export default function Home() {
           quality={100}
         />
       </div>
-      <div className="relative z-10 p-5">Some overlay things go in here</div>
+      <Navbar />
     </div>
   );
 }
