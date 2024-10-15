@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../server/config.firebase";
-import { Label } from "./ui/label"; // Asegúrate de que el componente Label esté correctamente importado
-import { Button } from "./ui/button"; // Asegúrate de que el componente Button esté correctamente importado
+import { Label } from "./ui/label";
+import { Button } from "./ui/button";
 
 const RegisterForm = ({ onClose }: { onClose: () => void }) => {
   const [email, setEmail] = useState("");
