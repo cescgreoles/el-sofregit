@@ -8,12 +8,15 @@ import RegisterForm from "./RegisterForm";
 import "tailwindcss/tailwind.css";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -25,6 +28,8 @@ const Navbar = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const handleLogout = () => signOut(auth);
 
+  const isActive = (path: string) => pathname === path;
+
   return (
     <nav className="bg-black bg-opacity-70 p-4">
       <div className="container mx-auto flex justify-between items-center">
@@ -34,14 +39,26 @@ const Navbar = () => {
 
         <ul className="hidden md:flex space-x-6 text-white">
           <li>
-            <Link href="/">Inici</Link>
+            <Link href="/" className={isActive("/") ? "text-yellow-400" : ""}>
+              Inici
+            </Link>
           </li>
           <li>
-            <Link href="/recipes">Receptes</Link>
+            <Link
+              href="/recipes"
+              className={isActive("/recipes") ? "text-yellow-400" : ""}
+            >
+              Receptes
+            </Link>
           </li>
           {isAuthenticated && (
             <li>
-              <Link href="/perfil">Perfil</Link>
+              <Link
+                href="/perfil"
+                className={isActive("/perfil") ? "text-yellow-400" : ""}
+              >
+                Perfil
+              </Link>
             </li>
           )}
         </ul>
@@ -105,17 +122,29 @@ const Navbar = () => {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden  text-white">
+        <div className="md:hidden text-white">
           <ul className="flex flex-col items-center space-y-2 py-4">
             <li>
-              <Link href="/">Inici</Link>
+              <Link href="/" className={isActive("/") ? "text-yellow-400" : ""}>
+                Inici
+              </Link>
             </li>
             <li>
-              <Link href="/receptes">Receptes</Link>
+              <Link
+                href="/recipes"
+                className={isActive("/recipes") ? "text-yellow-400" : ""}
+              >
+                Receptes
+              </Link>
             </li>
             {isAuthenticated && (
               <li>
-                <Link href="/perfil">Perfil</Link>
+                <Link
+                  href="/perfil"
+                  className={isActive("/perfil") ? "text-yellow-400" : ""}
+                >
+                  Perfil
+                </Link>
               </li>
             )}
             {!isAuthenticated ? (

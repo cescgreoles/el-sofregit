@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
           quality={100}
         />
       </div>
-      <Navbar />
     </div>
   );
 }

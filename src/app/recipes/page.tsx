@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../../server/config.firebase";
 import CreateRecipe from "@/components/CreateRecipe";
+import Image from "next/image";
 
 type Recipe = {
   id: string;
   title: string;
   ingredients: string;
   instructions: string;
+  imageUrl?: string;
+  type: string;
+  diet: string;
 };
 
 export default function RecipeList() {
@@ -48,10 +52,6 @@ export default function RecipeList() {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-4xl font-bold text-center mb-10 text-gray-800">
-        Lista de Recetas
-      </h1>
-
       {recipes.length === 0 ? (
         <p className="text-center text-gray-600">No hay recetas disponibles.</p>
       ) : (
@@ -61,6 +61,15 @@ export default function RecipeList() {
               key={recipe.id}
               className="p-6 border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow bg-white"
             >
+              {recipe.imageUrl && (
+                <Image
+                  src={recipe.imageUrl}
+                  alt={recipe.title}
+                  className="mb-4 rounded-lg"
+                  width={100}
+                  height={50}
+                />
+              )}
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                 {recipe.title}
               </h2>
@@ -71,6 +80,14 @@ export default function RecipeList() {
               <p className="text-gray-600">
                 <strong className="text-gray-700">Instrucciones:</strong>{" "}
                 {recipe.instructions}
+              </p>
+              <p className="text-gray-600">
+                <strong className="text-gray-700">Tipo de Comida:</strong>{" "}
+                {recipe.type}
+              </p>
+              <p className="text-gray-600">
+                <strong className="text-gray-700">Tipo de Dieta:</strong>{" "}
+                {recipe.diet}
               </p>
             </div>
           ))}
