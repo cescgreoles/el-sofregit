@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../../../server/config.firebase";
-import CreateRecipe from "@/components/CreateRecipe";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type Recipe = {
   id: string;
@@ -47,46 +48,46 @@ export default function RecipeList() {
   }, []);
 
   if (loading) {
-    return <p className="text-center text-gray-600">Cargando recetas...</p>;
+    return <p className="text-center text-white">Cargando recetas...</p>;
   }
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 text-white">
       {recipes.length === 0 ? (
-        <p className="text-center text-gray-600">No hay recetas disponibles.</p>
+        <p className="text-center text-white">No hi ha receptes disponibles.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {recipes.map((recipe) => (
             <div
               key={recipe.id}
-              className="p-6 border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow bg-white"
+              className="p-6 border bg-black bg-opacity-70  border-gray-200 rounded-lg shadow-lg hover:shadow-xl "
             >
               {recipe.imageUrl && (
                 <Image
                   src={recipe.imageUrl}
                   alt={recipe.title}
-                  className="mb-4 rounded-lg"
-                  width={100}
-                  height={50}
+                  className="mb-4 rounded-lg w-full object-cover h-40"
+                  width={400}
+                  height={160}
                 />
               )}
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              <h2 className="text-2xl font-bold text-white mb-4">
                 {recipe.title}
               </h2>
-              <p className="text-gray-600">
-                <strong className="text-gray-700">Ingredientes:</strong>{" "}
+              <p className="text-white">
+                <strong className="text-white">Ingredients:</strong>{" "}
                 {recipe.ingredients}
               </p>
-              <p className="text-gray-600">
-                <strong className="text-gray-700">Instrucciones:</strong>{" "}
+              <p className="text-white">
+                <strong className="text-white">Instruccions:</strong>{" "}
                 {recipe.instructions}
               </p>
-              <p className="text-gray-600">
-                <strong className="text-gray-700">Tipo de Comida:</strong>{" "}
+              <p className="text-white">
+                <strong className="text-white">Tipus de Menjar:</strong>{" "}
                 {recipe.type}
               </p>
-              <p className="text-gray-600">
-                <strong className="text-gray-700">Tipo de Dieta:</strong>{" "}
+              <p className="text-white">
+                <strong className="text-white">Tipus de Dieta:</strong>{" "}
                 {recipe.diet}
               </p>
             </div>
@@ -94,8 +95,10 @@ export default function RecipeList() {
         </div>
       )}
 
-      <div className="mt-12">
-        <CreateRecipe />
+      <div className="mt-8 flex justify-center">
+        <Button className="bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded-lg shadow-md">
+          <Link href="/create-recipe">Crear Recepta</Link>
+        </Button>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../server/config.firebase";
+import { db } from "../../../server/config.firebase";
 import { useState } from "react";
-import { Label } from "./ui/label";
-import { Button } from "./ui/button";
+import { Label } from "../../components/ui/label";
+import { Button } from "../../components/ui/button";
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../../server/config.firebase";
+import { storage } from "../../../server/config.firebase";
 import { Input } from "@/components/ui/input";
 
 enum FoodType {
