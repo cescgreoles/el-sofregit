@@ -1,3 +1,5 @@
+"use client";
+
 import { useForm } from "react-hook-form";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../server/config.firebase";

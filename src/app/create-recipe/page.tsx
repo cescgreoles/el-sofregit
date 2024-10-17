@@ -1,3 +1,5 @@
+"use client";
+
 import { useForm } from "react-hook-form";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../../server/config.firebase";
@@ -72,27 +74,22 @@ export default function CreateRecipe() {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-4xl">
-      <h1 className="text-3xl font-bold mb-6 text-center sm:text-left">
-        Crear Receta
-      </h1>
+    <div className="container mx-auto p-6 m-4 max-w-4xl bg-black bg-opacity-70 ">
+      <h1 className="text-2xl  mb-6  text-center text-white">Crear Receta</h1>
 
       {successMessage && (
         <p className="text-green-500 mb-4">{successMessage}</p>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-white">
         <div className="w-full">
-          <Label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <Label htmlFor="title" className="block text-sm font-medium ">
             Título
           </Label>
           <Input
             id="title"
             {...register("title", { required: "El título es requerido" })}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full px-4 py-2 border bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
           {errors.title && (
             <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
@@ -100,10 +97,7 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label
-            htmlFor="ingredients"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <Label htmlFor="ingredients" className="block text-sm font-medium ">
             Ingredientes
           </Label>
           <textarea
@@ -121,10 +115,7 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label
-            htmlFor="instructions"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <Label htmlFor="instructions" className="block text-sm font-medium ">
             Instrucciones
           </Label>
           <textarea
@@ -142,10 +133,7 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label
-            htmlFor="type"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <Label htmlFor="type" className="block text-sm font-medium ">
             Tipo de Comida
           </Label>
           <select
@@ -167,10 +155,7 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label
-            htmlFor="diet"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <Label htmlFor="diet" className="block text-sm font-medium ">
             Tipo de Dieta
           </Label>
           <select
@@ -190,10 +175,7 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label
-            htmlFor="image"
-            className="block text-sm font-medium text-gray-700"
-          >
+          <Label htmlFor="image" className="block text-sm font-medium ">
             Foto de la Receta
           </Label>
           <input
@@ -212,7 +194,7 @@ export default function CreateRecipe() {
           <Button
             type="submit"
             disabled={loading}
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400"
+            className=" inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white  focus:outline-none focus:ring-2 focus:ring-offset-2  disabled:bg-gray-400"
           >
             {loading ? "Guardando..." : "Guardar Receta"}
           </Button>
