@@ -4,11 +4,16 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0; /* Asegura que no haya márgenes */
+  height: full; /* Asegura que el body ocupe toda la altura de la ventana */
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .bg-cover {
+    background-size: cover;
   }
 }
 

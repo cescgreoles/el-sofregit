@@ -9,6 +9,8 @@ import "tailwindcss/tailwind.css";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
+import { FaUtensils, FaUser, FaHome } from "react-icons/fa";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,39 +27,66 @@ const Navbar = () => {
     return () => unsubscribe();
   }, []);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
   const handleLogout = () => signOut(auth);
 
   const isActive = (path: string) => pathname === path;
 
+  const closeForms = () => {
+    setShowLoginForm(false);
+    setShowRegisterForm(false);
+  };
+
   return (
-    <nav className="bg-black bg-opacity-70 p-4">
+    <nav className="bg-white p-4 text-black shadow-md relative">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-white italic text-xl font-bold">
-          El Sofregit
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={50}
+            height={50}
+            className="mr-2"
+          />
+          <span className="text-black italic text-xl font-bold">
+            El Sofregit
+          </span>
         </Link>
 
-        <ul className="hidden md:flex space-x-6 text-white">
+        <ul className="hidden md:flex space-x-6">
           <li>
-            <Link href="/" className={isActive("/") ? "text-yellow-400" : ""}>
-              Inici
+            <Link
+              href="/"
+              className={`hover:text-yellow-500 ${
+                isActive("/") ? "text-yellow-500 font-semibold" : "text-black"
+              }`}
+            >
+              <FaHome className="inline-block mr-1" /> Inici
             </Link>
           </li>
           <li>
             <Link
               href="/recipes"
-              className={isActive("/recipes") ? "text-yellow-400" : ""}
+              className={`hover:text-yellow-500 ${
+                isActive("/recipes")
+                  ? "text-yellow-500 font-semibold"
+                  : "text-black"
+              }`}
             >
-              Receptes
+              <FaUtensils className="inline-block mr-1" /> Receptes
             </Link>
           </li>
           {isAuthenticated && (
             <li>
               <Link
-                href="/perfil"
-                className={isActive("/perfil") ? "text-yellow-400" : ""}
+                href="/profile"
+                className={`hover:text-yellow-500 ${
+                  isActive("/perfil")
+                    ? "text-yellow-500 font-semibold"
+                    : "text-black"
+                }`}
               >
-                Perfil
+                <FaUser className="inline-block mr-1" /> Perfil
               </Link>
             </li>
           )}
@@ -68,7 +97,7 @@ const Navbar = () => {
             <>
               <Button
                 onClick={() => setShowLoginForm(true)}
-                className="bg-black bg-opacity-70"
+                className="bg-black text-white hover:bg-opacity-80"
               >
                 Iniciar Sessió
               </Button>
@@ -79,14 +108,14 @@ const Navbar = () => {
           ) : (
             <Button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-3 py-1 rounded-md"
+              className="bg-red-500 text-white hover:bg-red-600"
             >
               Logout
             </Button>
           )}
         </div>
 
-        <Button className="md:hidden text-white" onClick={toggleMenu}>
+        <Button className="md:hidden text-black" onClick={toggleMenu}>
           {menuOpen ? (
             <svg
               className="w-6 h-6"
@@ -122,17 +151,28 @@ const Navbar = () => {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden text-white">
+        <div className="md:hidden text-black">
           <ul className="flex flex-col items-center space-y-2 py-4">
             <li>
-              <Link href="/" className={isActive("/") ? "text-yellow-400" : ""}>
+              <Link
+                href="/"
+                className={`hover:text-yellow-500 ${
+                  isActive("/") ? "text-yellow-500 font-semibold" : "text-black"
+                }`}
+                onClick={() => setMenuOpen(false)}
+              >
                 Inici
               </Link>
             </li>
             <li>
               <Link
                 href="/recipes"
-                className={isActive("/recipes") ? "text-yellow-400" : ""}
+                className={`hover:text-yellow-500 ${
+                  isActive("/recipes")
+                    ? "text-yellow-500 font-semibold"
+                    : "text-black"
+                }`}
+                onClick={() => setMenuOpen(false)}
               >
                 Receptes
               </Link>
@@ -140,8 +180,13 @@ const Navbar = () => {
             {isAuthenticated && (
               <li>
                 <Link
-                  href="/perfil"
-                  className={isActive("/perfil") ? "text-yellow-400" : ""}
+                  href="/profile"
+                  className={`hover:text-yellow-500 ${
+                    isActive("/perfil")
+                      ? "text-yellow-500 font-semibold"
+                      : "text-black"
+                  }`}
+                  onClick={() => setMenuOpen(false)}
                 >
                   Perfil
                 </Link>
@@ -151,16 +196,22 @@ const Navbar = () => {
               <>
                 <li>
                   <Button
-                    onClick={() => setShowLoginForm(true)}
-                    className="bg-black bg-opacity-70"
+                    onClick={() => {
+                      setShowLoginForm(true);
+                      setMenuOpen(false);
+                    }}
+                    className="bg-black text-white hover:bg-opacity-80"
                   >
                     Iniciar Sessió
                   </Button>
                 </li>
                 <li>
                   <Button
-                    onClick={() => setShowRegisterForm(true)}
-                    className="bg-black bg-opacity-70"
+                    onClick={() => {
+                      setShowRegisterForm(true);
+                      setMenuOpen(false);
+                    }}
+                    className="bg-black text-white hover:bg-opacity-80"
                   >
                     Registrar-se
                   </Button>
@@ -168,7 +219,13 @@ const Navbar = () => {
               </>
             ) : (
               <li>
-                <Button onClick={handleLogout} className="">
+                <Button
+                  onClick={() => {
+                    handleLogout();
+                    setMenuOpen(false);
+                  }}
+                  className="bg-red-500 text-white hover:bg-red-600"
+                >
                   Logout
                 </Button>
               </li>
@@ -177,9 +234,27 @@ const Navbar = () => {
         </div>
       )}
 
-      {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} />}
-      {showRegisterForm && (
-        <RegisterForm onClose={() => setShowRegisterForm(false)} />
+      {(showLoginForm || showRegisterForm) && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            {showLoginForm && (
+              <LoginForm
+                onClose={() => {
+                  setShowLoginForm(false);
+                  closeForms();
+                }}
+              />
+            )}
+            {showRegisterForm && (
+              <RegisterForm
+                onClose={() => {
+                  setShowRegisterForm(false);
+                  closeForms();
+                }}
+              />
+            )}
+          </div>
+        </div>
       )}
     </nav>
   );

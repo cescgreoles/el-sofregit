@@ -31,20 +31,19 @@ export default function RootLayout({
         <link rel="icon" href="/logo.png" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
         <Navbar />
         <div className="absolute inset-0 -z-10">
-          {/* Corregido para la nueva versión */}
           <Image
             src="/bg.png"
             alt="Background image"
-            fill // Propiedad moderna en lugar de "layout"
-            style={{ objectFit: "cover" }} // Usar estilo inline o clase CSS
-            priority={true} // Para cargar la imagen de fondo con prioridad
+            fill
+            className="object-cover"
+            priority={true}
           />
         </div>
-        {children}
+        <main className="relative z-10 min-h-screen">{children}</main>{" "}
       </body>
     </html>
   );
