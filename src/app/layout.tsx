@@ -35,12 +35,13 @@ export default function RootLayout({
       >
         <Navbar />
         <div className="absolute inset-0 -z-10">
+          {/* Corregido para la nueva versión */}
           <Image
             src="/bg.png"
             alt="Background image"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
+            fill // Propiedad moderna en lugar de "layout"
+            style={{ objectFit: "cover" }} // Usar estilo inline o clase CSS
+            priority={true} // Para cargar la imagen de fondo con prioridad
           />
         </div>
         {children}
