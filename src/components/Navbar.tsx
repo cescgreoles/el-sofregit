@@ -48,9 +48,7 @@ const Navbar = () => {
             height={50}
             className="mr-2"
           />
-          <span className="text-black italic text-xl font-bold">
-            El Sofregit
-          </span>
+          <span className="text-black text-xl font-bold">El Sofregit</span>
         </Link>
 
         <ul className="hidden md:flex space-x-6">
@@ -97,7 +95,7 @@ const Navbar = () => {
             <>
               <Button
                 onClick={() => setShowLoginForm(true)}
-                className="bg-black text-white hover:bg-opacity-80"
+                className="bg-yellow-500 text-white hover:bg-yellow-500"
               >
                 Iniciar Sessió
               </Button>
@@ -110,7 +108,7 @@ const Navbar = () => {
               onClick={handleLogout}
               className="bg-red-500 text-white hover:bg-red-600"
             >
-              Logout
+              Tancar Sessió
             </Button>
           )}
         </div>

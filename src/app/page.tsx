@@ -1,6 +1,17 @@
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { FaUtensils, FaShareAlt, FaUserFriends, FaStar } from "react-icons/fa";
+import RegisterForm from "../components/RegisterForm";
 
 export default function Home() {
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  const closeForms = () => {
+    setShowRegisterForm(false);
+  };
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <header className="text-center mb-8 bg-white shadow-lg rounded-lg p-6">
@@ -18,7 +29,7 @@ export default function Home() {
             Sobre Nosaltres
           </h2>
           <p className="mt-4 text-gray-600">
-            A Receptes Gourmet, volem fomentar la passió per la cuina. La nostra
+            A El Sofregit, volem fomentar la passió per la cuina. La nostra
             plataforma t&apos;ofereix l&apos;oportunitat de penjar les teves
             receptes, veure les creacions d&apos;altres usuaris i inspirar-te
             per cuinar plats deliciosos a casa.
@@ -57,15 +68,18 @@ export default function Home() {
             Registra&apos;t avui mateix i comença a explorar el món de les
             receptes. És gratis i ràpid!
           </p>
-          <button className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded transition-all duration-300">
-            Registra&apos;t Ara
-          </button>
+          <div className="p-3">
+            <Button
+              onClick={() => setShowRegisterForm(true)}
+              className="bg-black text-white hover:bg-opacity-80"
+            >
+              Registrar-se
+            </Button>
+          </div>
         </section>
       </main>
 
-      <footer className="text-center mt-8 text-black-500">
-        <p>&copy; 2024 El Sofregit. Tots els drets reservats.</p>
-      </footer>
+      {showRegisterForm && <RegisterForm onClose={closeForms} />}
     </div>
   );
 }

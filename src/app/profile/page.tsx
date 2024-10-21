@@ -66,7 +66,7 @@ const ProfilePage = () => {
     <div className="flex flex-col items-center justify-center min-h-screen  p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold mb-4 text-yellow-500">
-          Perfil de Usuario
+          Perfil de Usuari
         </h1>
         {error && <p className="text-red-500">{error}</p>}
         <div className="flex items-center mb-4">
@@ -85,7 +85,7 @@ const ProfilePage = () => {
         <form onSubmit={handleUpdate} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Nombre
+              Nom
             </label>
             <input
               type="text"
@@ -98,7 +98,7 @@ const ProfilePage = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Correo Electrónico
+              Correu Electrònic
             </label>
             <input
               type="email"
@@ -122,7 +122,7 @@ const ProfilePage = () => {
           onClick={handleLogout}
           className="w-full mt-4 bg-red-600 text-white hover:bg-red-700 flex items-center justify-center"
         >
-          <FaSignOutAlt className="mr-2" /> Cerrar Sesión
+          <FaSignOutAlt className="mr-2" /> Tancar Sessió
         </Button>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../server/config.firebase";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
-import { FaUser } from "react-icons/fa"; // Asegúrate de importar el ícono
+import { FaUser } from "react-icons/fa";
 
 const LoginForm = ({ onClose }: { onClose: () => void }) => {
   const [email, setEmail] = useState("");

@@ -74,22 +74,24 @@ export default function CreateRecipe() {
   };
 
   return (
-    <div className="container mx-auto p-6 m-4 max-w-4xl bg-black bg-opacity-70 ">
-      <h1 className="text-2xl  mb-6  text-center text-white">Crear Receta</h1>
+    <div className="container mx-auto p-6 m-4 max-w-4xl bg-white  rounded-md shadow-lg">
+      <h1 className="text-2xl mb-6 text-center text-yellow-500 font-semibold">
+        Crear Recepta
+      </h1>
 
       {successMessage && (
         <p className="text-green-500 mb-4">{successMessage}</p>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-white">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 text-black">
         <div className="w-full">
           <Label htmlFor="title" className="block text-sm font-medium ">
-            Título
+            Títol
           </Label>
           <Input
             id="title"
-            {...register("title", { required: "El título es requerido" })}
-            className="mt-1 block w-full px-4 py-2 border bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            {...register("title", { required: "El títol és requerit" })}
+            className="mt-1 block w-full px-4 py-2 border bg-white rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           />
           {errors.title && (
             <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
@@ -97,15 +99,15 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label htmlFor="ingredients" className="block text-sm font-medium ">
-            Ingredientes
+          <Label htmlFor="ingredients" className="block text-sm font-medium">
+            Ingredients
           </Label>
           <textarea
             id="ingredients"
             {...register("ingredients", {
-              required: "Los ingredientes son requeridos",
+              required: "Els ingredients són requerits",
             })}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full px-4 py-2 border bg-white  rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           ></textarea>
           {errors.ingredients && (
             <p className="text-red-500 text-sm mt-1">
@@ -115,15 +117,15 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label htmlFor="instructions" className="block text-sm font-medium ">
-            Instrucciones
+          <Label htmlFor="instructions" className="block text-sm font-medium">
+            Instruccions
           </Label>
           <textarea
             id="instructions"
             {...register("instructions", {
-              required: "Las instrucciones son requeridas",
+              required: "Les instruccions són requerides",
             })}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full px-4 py-2 border bg-white  rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           ></textarea>
           {errors.instructions && (
             <p className="text-red-500 text-sm mt-1">
@@ -133,15 +135,15 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label htmlFor="type" className="block text-sm font-medium ">
-            Tipo de Comida
+          <Label htmlFor="type" className="block text-sm font-medium">
+            Tipus de Menjar
           </Label>
           <select
             id="type"
             {...register("type", {
-              required: "El tipo de comida es requerido",
+              required: "El tipus de menjar és requerit",
             })}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full px-4 py-2 border bg-white  rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           >
             {Object.values(FoodType).map((foodType) => (
               <option key={foodType} value={foodType}>
@@ -155,13 +157,13 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label htmlFor="diet" className="block text-sm font-medium ">
-            Tipo de Dieta
+          <Label htmlFor="diet" className="block text-sm font-medium">
+            Tipus de Dieta
           </Label>
           <select
             id="diet"
-            {...register("diet", { required: "El tipo de dieta es requerido" })}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            {...register("diet", { required: "El tipus de dieta és requerit" })}
+            className="mt-1 block w-full px-4 py-2 border bg-white  rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           >
             {Object.values(DietType).map((dietType) => (
               <option key={dietType} value={dietType}>
@@ -175,15 +177,15 @@ export default function CreateRecipe() {
         </div>
 
         <div className="w-full">
-          <Label htmlFor="image" className="block text-sm font-medium ">
-            Foto de la Receta
+          <Label htmlFor="image" className="block text-sm font-medium">
+            Foto de la Recepta
           </Label>
           <input
             id="image"
             type="file"
             accept="image/*"
-            {...register("image", { required: "La imagen es requerida" })}
-            className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border file:border-gray-300 file:text-sm file:font-semibold file:bg-gray-50 hover:file:bg-gray-100"
+            {...register("image", { required: "La imatge és requerida" })}
+            className="mt-1 block w-full text-sm bg-white  file:mr-4 file:py-2 file:px-4 file:rounded file:border"
           />
           {errors.image && (
             <p className="text-red-500 text-sm mt-1">{errors.image.message}</p>
@@ -194,9 +196,9 @@ export default function CreateRecipe() {
           <Button
             type="submit"
             disabled={loading}
-            className=" inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white  focus:outline-none focus:ring-2 focus:ring-offset-2  disabled:bg-gray-400"
+            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-yellow-500 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:bg-gray-400"
           >
-            {loading ? "Guardando..." : "Guardar Receta"}
+            {loading ? "Guardant..." : "Desar Recepta"}
           </Button>
         </div>
       </form>
