@@ -9,6 +9,7 @@ import { Button } from "../../components/ui/button";
 import { uploadBytes, getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../../../server/config.firebase";
 import { Input } from "@/components/ui/input";
+import { auth } from "../../../server/config.firebase";
 
 enum FoodType {
   Dessert = "Postre",
@@ -55,6 +56,12 @@ export default function CreateRecipe() {
         imageUrl = await getDownloadURL(storageRef);
       }
 
+      const userId = auth.currentUser?.uid;
+
+      if (!userId) {
+        throw new Error("User not authenticated");
+      }
+
       await addDoc(collection(db, "recipes"), {
         title: data.title,
         ingredients: data.ingredients,
@@ -62,6 +69,7 @@ export default function CreateRecipe() {
         type: data.type,
         diet: data.diet,
         imageUrl,
+        userId,
         createdAt: new Date(),
       });
 
@@ -74,7 +82,7 @@ export default function CreateRecipe() {
   };
 
   return (
-    <div className="container mx-auto p-6 m-4 max-w-4xl bg-white  rounded-md shadow-lg">
+    <div className="container mx-auto p-6 m-4 max-w-4xl bg-white rounded-md shadow-lg">
       <h1 className="text-2xl mb-6 text-center text-yellow-500 font-semibold">
         Crear Recepta
       </h1>
@@ -107,7 +115,7 @@ export default function CreateRecipe() {
             {...register("ingredients", {
               required: "Els ingredients són requerits",
             })}
-            className="mt-1 block w-full px-4 py-2 border bg-white  rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+            className="mt-1 block w-full px-4 py-2 border bg-white rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           ></textarea>
           {errors.ingredients && (
             <p className="text-red-500 text-sm mt-1">
@@ -125,7 +133,7 @@ export default function CreateRecipe() {
             {...register("instructions", {
               required: "Les instruccions són requerides",
             })}
-            className="mt-1 block w-full px-4 py-2 border bg-white  rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+            className="mt-1 block w-full px-4 py-2 border bg-white rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           ></textarea>
           {errors.instructions && (
             <p className="text-red-500 text-sm mt-1">
@@ -143,7 +151,7 @@ export default function CreateRecipe() {
             {...register("type", {
               required: "El tipus de menjar és requerit",
             })}
-            className="mt-1 block w-full px-4 py-2 border bg-white  rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+            className="mt-1 block w-full px-4 py-2 border bg-white rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           >
             {Object.values(FoodType).map((foodType) => (
               <option key={foodType} value={foodType}>
@@ -163,7 +171,7 @@ export default function CreateRecipe() {
           <select
             id="diet"
             {...register("diet", { required: "El tipus de dieta és requerit" })}
-            className="mt-1 block w-full px-4 py-2 border bg-white  rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
+            className="mt-1 block w-full px-4 py-2 border bg-white rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"
           >
             {Object.values(DietType).map((dietType) => (
               <option key={dietType} value={dietType}>
@@ -185,7 +193,7 @@ export default function CreateRecipe() {
             type="file"
             accept="image/*"
             {...register("image", { required: "La imatge és requerida" })}
-            className="mt-1 block w-full text-sm bg-white  file:mr-4 file:py-2 file:px-4 file:rounded file:border"
+            className="mt-1 block w-full text-sm bg-white file:mr-4 file:py-2 file:px-4 file:rounded file:border"
           />
           {errors.image && (
             <p className="text-red-500 text-sm mt-1">{errors.image.message}</p>

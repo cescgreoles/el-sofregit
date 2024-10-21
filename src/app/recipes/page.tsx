@@ -16,6 +16,7 @@ type Recipe = {
   imageUrl?: string;
   type: string;
   diet: string;
+  userId: string;
 };
 
 export default function RecipeList() {
@@ -39,7 +40,7 @@ export default function RecipeList() {
 
         setRecipes(recipesData);
       } catch (error) {
-        console.error("Error al recuperar recetas: ", error);
+        console.error("Error retrieving recipes: ", error);
       } finally {
         setLoading(false);
       }
@@ -93,6 +94,9 @@ export default function RecipeList() {
               <p className="text-black">
                 <strong>Tipus de Dieta:</strong> {recipe.diet}
               </p>
+              <p className="text-black">
+                <strong>User ID:</strong> {recipe.userId}
+              </p>{" "}
             </div>
           ))}
         </div>
